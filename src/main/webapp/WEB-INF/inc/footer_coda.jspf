@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--footer_coda.jspf --%>
+<%
+// 박병준 아빠
+// IP : 192.168.10.2 , URI = /study/08/abc.jsp  
+log("IP=" + request.getRemoteAddr() + ", URI=" + request.getRequestURI() );
+
+%>
+<div>
+	<ul>
+		<li>대전 광역시 중구 태평동 버드내		
+		<li>Milkis.co.kr	
+	</ul>
+</div>

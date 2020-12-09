@@ -1,0 +1,25 @@
+# read39.txt
+
+FreeBoard(자유게시판)에서 했던 것처럼 
+Member(회원관리)의  모든 영역을 스프링 DI 가 적용되도록 
+변경해 주세요 !! (조영제 아빠 필수)
+
+-- AOP 용어
+핵심관심사 : Core Concern 
+  실제 업무로직
+
+횡단관심사 : Cross Cutting Concern 
+   시스탬 관리적으로 필요한 기능
+   (로깅, 시간체크, 예외처리, 트랜잭션) 
+
+포인트 지정자 
+ execution : AspectJ 표기법   
+ [접근제어자] 반환 [팩키지 및 클래스명]메서드()
+ public String com.study.member.dao.MemberDao.getMember(String, String)
+ 
+
+
+
+
+
+   

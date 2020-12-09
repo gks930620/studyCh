@@ -1,0 +1,35 @@
+# study4_시작.txt
+
+이클립스 ( STS 플러그인 통해서 )
+ - 스프링 프로젝트( lagacy project 로 생성 )
+ - Maven 기반
+ - @Annotation -> @RequestMapping
+ 
+ -------------------
+ DI (IoC) : 스프링(짱), 구글 쥬스
+ MVC : sturts, webwork, stuts2, 스프링, 엄청 많아요..
+ AOP : AspectJ(짱), .. 스프링...  
+ 
+ 
+  - 자유게시판 모두 변경 
+  - 회원관리 모두 처리  
+POM (Maven 설정)  
+ 
+최초 Maven 프로젝트 생성 
+ java 버전 : 1.8 
+ 서블릿    : 3.1 
+  
+ - 해당 프로젝트의 팝업메뉴 : maven -> 업데이트 프로젝트
+   run as : maven install
+   run as : maven clean
+   
+   project 메뉴 : clean (현재 개발자 서버에서 테스트)
+         
+  mybatis, mybatis-spring 
+  commons lang3, dbcp2, beanutils
+  ojdbc8
+  jackson-databind
+  
+  
+  
+  

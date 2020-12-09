@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="daoOracle" 
+	      class="com.di.step2.BoardDaoOracle"
+	      c:driver="Oracle8Driver" 
+	      c:url="jdbc:oracle:thin:@127.0.0.1:1521:babo"
+	      p:driver="abcd" 
+	      p:url="babo" />
+	
+	<bean id="daoMySql" class="com.di.step2.BoardDaoMySql"  >
+		<constructor-arg index="1" value="jdbc:mysql://localhost/mydb" />
+		<constructor-arg index="0" value="MySql5.6Driver" />
+	</bean>
+
+	<!-- scope="prototype" 이면 객체의 생명주기 관리가 어렵다. -->
+	<bean id="boardService" class="com.di.step2.BoardService" 
+				init-method="myInit"
+				destroy-method="myDestroy"
+				scope="prototype">	
+		<constructor-arg ref="daoMySql"  />
+	</bean>
+
+
+</beans>
+
+
+
+
