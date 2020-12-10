@@ -15,7 +15,8 @@
 		<div class="page-header">
 			<h3>회원가입</h3>
 		</div>
-		<form action="memberRegist.wow" method="post">
+			
+		<form:form action="memberRegist.wow" method="post">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -46,8 +47,10 @@
 					<tr>
 						<th>메일</th> 
 						<td><input type="text" name="memMail" class="form-control input-sm" id="email">
-						<input type="button" onclick="fn_emailSend()">인증메일발송
-							
+						
+						<button onclick="fn_emailSend()">인증메일발송</button>
+						<input type="text" name="" class="form-control input-sm" id="emailKey">
+						<button onclick="fn_emailKeyCheck()">인증번호확인</button>
 						</td>
 
 					</tr>
@@ -86,7 +89,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</form>
+		</form:form>
 	</div>
 
 
@@ -95,7 +98,7 @@
 	function fn_emailSend() {
 		event.preventDefault(); //form으로인해 insertMessage넘어가는거 패스 
 		var v_email = document.getElementById("email").value;
-		alert("메일을 보냈습니다. 확인해주세요"+v_email);
+		alert("메일을 보냈습니다. 확인해주세요.  이메일주소 : "+v_email);
 		$.ajax({
 			url : "signUp.edu?email=" + v_email,
 			type : "post",
@@ -103,7 +106,6 @@
 			//data : {},
 			success : function(data) {
 				console.log(data);  //data는 난수 6자리
-				$("#sendedRandom").attr("value",data);	
 			},
 			error : function(request, status, error) {
 				console.log(request);

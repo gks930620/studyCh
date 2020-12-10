@@ -25,7 +25,7 @@
              role="button" aria-expanded="false">관리자<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
 						<li><a href="<%=request.getContextPath()%>/member/memberList.wow">회원관리</a></li>
-            <li><a href="#">통계</a></li>            
+            <li><a href="<%=request.getContextPath()%>/qna/qnaList.wow">qna</a></li>            
             <li class="divider"></li>
             <li><a href="#">컴공파이팅</a></li>
           </ul>

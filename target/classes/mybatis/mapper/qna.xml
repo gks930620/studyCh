@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.qna.dao.IQnaDao">
+	<!-- 검색 쿼리 -->
+	<sql id="searchQuery">
+		<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchJob)">
+			AND mem_job = #{searchJob}
+		</if>
+		<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchLike)">
+			AND mem_like = #{searchLike}
+		</if>
+		<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchWord)">
+			<choose>
+				<when test='searchType == "I"'>
+					AND mem_id 	 LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test='searchType == "N"'>
+					AND mem_name LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test='searchType == "T"'>
+					AND mem_hp 	 LIKE '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</if>
+	</sql>
+	
+
+
+	<select id="getQnaCount"
+		parameterType="com.study.qna.vo.QnaSearchVO" resultType="int">
+		SELECT COUNT(*)
+		FROM qna
+		WHERE bo_del_yn = 'N'
+
+		<include refid="searchQuery" />
+
+	</select>
+
+	<select id="getQnaList"
+		parameterType="com.study.qna.vo.QnaSearchVO"
+		resultType="com.study.qna.vo.QnaVO">
+		<include refid="common.PRE_PAGING_QRY" />
+		SELECT bo_no
+		, bo_title
+		, bo_writer
+		, TO_CHAR(bo_reg_date,'YYYY-MM-DD') AS bo_reg_date
+		, bo_del_yn
+		, bo_group_no
+		, bo_group_depth
+		FROM qna a LEFT JOIN comm_code b
+		ON ( 1=1 )
+		WHERE bo_del_yn = 'N'
+		<include refid="searchQuery" />
+		ORDER BY bo_no DESC
+		<include refid="common.POST_PAGING_QRY" />
+
+	</select>
+
+
+
+
+</mapper>
