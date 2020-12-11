@@ -11,3 +11,7 @@
 <link href="<%=request.getContextPath() %>/css/main.css" rel="stylesheet"> 
 <script src="<%=request.getContextPath() %>/js/jquery-1.11.2.min.js"></script>
 <script src="<%=request.getContextPath() %>/bootstrap-3.3.2/js/bootstrap.min.js"></script>    
+<script src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>    
+
+
+ckeditor

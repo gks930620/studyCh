@@ -58,10 +58,11 @@ public class MemberController {
 		return hobbyList;
 	}
 	
-	@RequestMapping(path = "/memberList.wow")
+	@RequestMapping("/memberList.wow")
 	public String memberList(@ModelAttribute("searchVO") MemberSearchVO searchVO,Model model)throws Exception {
 		
 		List<MemberVO> members = memberService.getMemberList(searchVO);
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		model.addAttribute("members", members);			
 		return "member/memberList";
 	}
@@ -196,6 +197,19 @@ public class MemberController {
 		String authKey = mss.sendAuthMail(email,req.getServerName(),req.getServerPort());
 		return authKey;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

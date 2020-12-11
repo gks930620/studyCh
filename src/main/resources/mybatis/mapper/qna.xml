@@ -34,12 +34,11 @@
 		SELECT COUNT(*)
 		FROM qna
 		WHERE bo_del_yn = 'N'
-
-		<include refid="searchQuery" />
-
+	<include refid="searchQuery" /> 
+	
 	</select>
 
-	<select id="getQnaList"
+<!-- 	<select id="getQnaList"
 		parameterType="com.study.qna.vo.QnaSearchVO"
 		resultType="com.study.qna.vo.QnaVO">
 		<include refid="common.PRE_PAGING_QRY" />
@@ -57,7 +56,136 @@
 		ORDER BY bo_no DESC
 		<include refid="common.POST_PAGING_QRY" />
 
+	</select> -->
+	
+		<select id="getQnaList"
+		parameterType="com.study.qna.vo.QnaSearchVO"
+		resultType="com.study.qna.vo.QnaVO">
+		<include refid="common.PRE_PAGING_QRY" />
+		SELECT
+		bo_no
+		,bo_title
+		,bo_category
+		,bo_writer
+		,bo_pass
+		,bo_content
+		,bo_ip
+		,bo_hit
+		,bo_mod_date
+		,bo_group_no
+		,bo_group_depth
+		, TO_CHAR(bo_reg_date,'YYYY-MM-DD') AS bo_reg_date
+		,bo_del_yn  
+		FROM qna 
+		
+		ORDER BY bo_group_no DESC, bo_no DESC    
+		<include refid="common.POST_PAGING_QRY" />
+
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+
+<select id="getQna" 
+					parameterType="int" 
+					resultType="com.study.qna.vo.QnaVO" >
+			SELECT bo_no        
+			     , bo_title     
+			     , bo_category  
+			     , b.comm_nm AS bo_category_nm 
+			     , bo_writer    
+			     , bo_pass      
+			     , bo_ip        
+			     , bo_content        
+			     , bo_hit       
+			     , TO_CHAR(bo_reg_date,'YYYY-MM-DD HH24:MI') AS bo_reg_date 
+			     , TO_CHAR(bo_mod_date,'YYYY-MM-DD HH24:MI') AS bo_mod_date 
+			     , bo_del_yn    
+			  FROM qna a 
+			       LEFT JOIN comm_code b                  
+			             ON ( a.bo_category = b.comm_cd )  
+			 WHERE bo_no = #{babo}
+	</select>
+	
+	<insert id="insertQna" 
+	        parameterType="com.study.qna.vo.QnaVO">
+		<selectKey keyProperty="boNo" resultType="int"  order="BEFORE">
+			SELECT seq_qna.nextval FROM dual
+		</selectKey>	        
+		<![CDATA[	        
+			INSERT INTO qna                        
+	         ( bo_no      , bo_title   , bo_category  
+	         , bo_writer  , bo_pass    , bo_content   
+	         , bo_ip      , bo_hit     , bo_reg_date  
+	         , bo_del_yn  , bo_group_no, bo_group_depth                            
+	         ) VALUES (    
+	           #{boNo}      , #{boTitle}  , #{boCategory}        
+	         , #{boWriter}  , #{boPass}   , #{boContent}          
+	         , #{boIp}      , 0           , SYSDATE    
+	         , 'N'          , seq_qna_group.nextval , 0
+	         )	
+		]]>
+	</insert>
+	
+	
+	
+	<insert id="insertQnaReply" 
+	        parameterType="com.study.qna.vo.QnaVO">
+		<selectKey keyProperty="boNo" resultType="int"  order="BEFORE">
+			SELECT seq_qna.nextval FROM dual
+		</selectKey>	        
+		<![CDATA[	        
+			INSERT INTO qna                        
+	         ( bo_no      , bo_title   , bo_category  
+	         , bo_writer  , bo_pass    , bo_content   
+	         , bo_ip      , bo_hit     , bo_reg_date  
+	         , bo_del_yn  , bo_group_no, bo_group_depth                            
+	         ) VALUES (    
+	           #{boNo}      , #{boTitle}  , #{boCategory}        
+	         , #{boWriter}  , #{boPass}   , #{boContent}          
+	         , #{boIp}      , 0           , SYSDATE    
+	         , 'N'          , #{boGroupNo} , #{boGroupDepth}+1
+	         )	
+		]]>
+	</insert>
+	
+	
+	
+	
+	
+	
+	<insert id="updateQna" 
+	        parameterType="com.study.qna.vo.QnaVO">
+			UPDATE qna            
+			   SET bo_title    = #{boTitle}       
+			     , bo_category = #{boCategory}
+			     , bo_writer   = #{boWriter}       
+			     , bo_content  = #{boContent}       
+			     , bo_mod_date = SYSDATE     
+			 WHERE bo_no = #{boNo}             
+		
+	</insert>
+	
+	<insert id="deleteQna" 
+	        parameterType="com.study.qna.vo.QnaVO">
+			UPDATE qna       
+			   SET bo_del_yn = 'Y'   
+			 WHERE bo_no  = #{boNo} 				
+	</insert>
+	
+
+	<update id="increaseHit" 
+	        parameterType="int">
+			UPDATE qna           
+			   SET bo_hit = bo_hit + 1   
+			 WHERE bo_no  = #{ysline}			     
+	</update>
+
 
 
 

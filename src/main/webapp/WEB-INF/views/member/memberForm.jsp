@@ -49,8 +49,9 @@
 						<td><input type="text" name="memMail" class="form-control input-sm" id="email">
 						
 						<button onclick="fn_emailSend()">인증메일발송</button>
-						<input type="text" name="" class="form-control input-sm" id="emailKey">
-						<button onclick="fn_emailKeyCheck()">인증번호확인</button>
+						
+						<input type="text" name="memMail" class="form-control input-sm" id="emailCheck">
+						<button onclick="fn_emailCheck()">이메일인증</button>
 						</td>
 
 					</tr>

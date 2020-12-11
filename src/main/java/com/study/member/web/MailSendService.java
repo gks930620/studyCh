@@ -18,15 +18,23 @@ public class MailSendService {
     private JavaMailSenderImpl mailSender;
 
     
-   
+    
+   private int setRandomKey(int size) {
+  	 
+  	 return 0;
+  	 
+   }
+    
     //인증메일 보내기
     public String sendAuthMail(String email,String url,int port) {
       //인증메일 보내기
       MimeMessage mail = mailSender.createMimeMessage();
-      String mailContent ="메일이 보내집니다";
+      
+      int authKey=setRandomKey(6);
+      String mailContent ="인증번호 : ";
       try {
           mail.setSubject("회원가입 이메일 인증 ", "utf-8");
-          mail.setText(mailContent, "utf-8", "html");
+          mail.setText(mailContent+123456, "utf-8", "html");
           mail.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
           mailSender.send(mail);
       } catch (MessagingException e) {
