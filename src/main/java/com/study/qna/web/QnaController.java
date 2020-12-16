@@ -44,8 +44,7 @@ public class QnaController {
 	@Inject
 	private IQnaService qnaService;
 	
-	@Inject
-	MailSendService mss;
+
 		
 	// @ModelAttribute 는 요청 메시드 진입전에 
 	// 먼저 동작하여 모델에 저장해줍니다.
